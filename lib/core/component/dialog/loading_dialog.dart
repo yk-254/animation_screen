@@ -5,15 +5,16 @@ void showLoadingDialog(BuildContext context) {
     context: context,
     barrierDismissible: false,
     builder: (_) {
-      return WillPopScope(
-        onWillPop: () async => false,
+      return PopScope(
+        canPop: false,
+        onPopInvoked: (_) async => false,
         child: Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          child: Column(
+          child: const Column(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 32),
                 child: CircularProgressIndicator(),

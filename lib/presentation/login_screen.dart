@@ -46,6 +46,8 @@ class _LoginScreenState extends State<LoginScreen> {
     isHandsUp?.change(passwordFocusNode.hasFocus);
   }
 
+  bool passwordVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     artboard,
                     "Login Machine",
                   );
-                  if (controller == null) return;         
+                  if (controller == null) return;
                   artboard.addController(controller!);
                   isChecking = controller?.findInput("isChecking");
                   numLook = controller?.findInput("numLook");
@@ -127,11 +129,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: TextField(
                       focusNode: passwordFocusNode,
                       controller: passwordController,
-                      decoration: const InputDecoration(
+                      obscureText: passwordVisible,
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          
+                          icon: Icon(
+                            passwordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                          onPressed: () {
+                            setState(
+                              () {
+                                passwordVisible = !passwordVisible;
+                              },
+                            );
+                          },
+                        ),
+                        
                         border: InputBorder.none,
                         hintText: "Password",
+                        
                       ),
-                      obscureText: true,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
@@ -160,12 +179,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xff9e4968),
+                        backgroundColor: const Color(0xff9e4968),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
                       ),
-                      child: const Text("Login",style: TextStyle(color: Colors.white),),
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ],
