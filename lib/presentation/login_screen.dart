@@ -70,13 +70,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 "assets/login-teddy.riv",
                 fit: BoxFit.fitHeight,
                 stateMachines: const ["Login Machine"],
-                onInit: (artboard) {
+                onInit: (artBoard) {
                   controller = StateMachineController.fromArtboard(
-                    artboard,
+                    artBoard,
                     "Login Machine",
                   );
                   if (controller == null) return;
-                  artboard.addController(controller!);
+                  artBoard.addController(controller!);
                   isChecking = controller?.findInput("isChecking");
                   numLook = controller?.findInput("numLook");
                   isHandsUp = controller?.findInput("isHandsUp");
@@ -118,7 +118,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 8),
                   Container(
+                    
                     decoration: BoxDecoration(
+                      
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -127,12 +129,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       vertical: 8,
                     ),
                     child: TextField(
+
                       focusNode: passwordFocusNode,
                       controller: passwordController,
                       obscureText: passwordVisible,
                       decoration: InputDecoration(
+                        suffixIconConstraints:const BoxConstraints(maxHeight: 37,),
                         suffixIcon: IconButton(
-                          
                           icon: Icon(
                             passwordVisible
                                 ? Icons.visibility
