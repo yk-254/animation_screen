@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class ResponsiveScreen extends StatelessWidget {
   final Widget mobile;
   final Widget tablet;
-  final Widget dekstop;
+  final Widget desktop;
 
   const ResponsiveScreen({
     required this.mobile,
     required this.tablet,
-    required this.dekstop,
-    Key? key,
-  }) : super(key: key);
+    required this.desktop,
+    super.key,
+  });
 
   static bool isMobile(BuildContext context) =>
       MediaQuery.of(context).size.width < 800;
@@ -25,7 +25,7 @@ class ResponsiveScreen extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth >= 1200) {
-          return dekstop;
+          return desktop;
         } else if (constraints.maxWidth >= 800 && constraints.maxWidth < 1200) {
           return tablet;
         } else {
